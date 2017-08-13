@@ -14,7 +14,7 @@ import com.network.sorket.blockingio.BlockingSocketService;
 public class WebFramework {
 
     public static void main(String[] args){
-        FrameworkAnnotationResolver.getInstance().initialization("com");
+        FrameworkAnnotationResolver.getInstance().initialization("com.framework");
         BeanFactory.getBeanFactory();
         try {
             new BlockingSocketService(9999).start();

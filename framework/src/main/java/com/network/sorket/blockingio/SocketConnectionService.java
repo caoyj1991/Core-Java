@@ -1,6 +1,6 @@
 package com.network.sorket.blockingio;
 
-import com.framework.dispatcher.HttpDispatcher;
+import com.framework.webdevelop.dispatcher.HttpDispatcher;
 import com.network.protocol.http.HttpProtocolResolver;
 import com.network.protocol.http.HttpRequest;
 import com.network.protocol.http.HttpResponse;
