@@ -21,7 +21,7 @@ Web Framework Already Exist Events
 * Lock
 * ThreadLocal
 * BlockingQueue
-***
+
 Already Exist API
 > - Realize Lock action by using <i><b>synchronized</b></i> keyword
 >   - <b>com.current.lock.v1.SynchronizedLock</b> unfair lock can block thread
