@@ -1,6 +1,7 @@
 package com.current.lock;
 
 import com.current.lock.v1.SynchronizedLock;
+import com.current.lock.v2.SynchronizedFairLock;
 
 /**
  * Author Mr.Pro
@@ -8,7 +9,7 @@ import com.current.lock.v1.SynchronizedLock;
  */
 public class LockTestMain {
     static int sum = 0;
-    static SynchronizedLock lock = new SynchronizedLock();
+    static Lock lock = new SynchronizedFairLock();
     public static void main(String[] args){
 
         for (int i=0;i<1;i++){
@@ -27,7 +28,8 @@ public class LockTestMain {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            thread2.stop();
+            thread2.interrupt();
+            thread3.start();
         }
     }
 
