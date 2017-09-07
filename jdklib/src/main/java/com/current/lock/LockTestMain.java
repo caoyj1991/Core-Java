@@ -8,25 +8,41 @@ import com.current.lock.v1.SynchronizedLock;
  */
 public class LockTestMain {
     static int sum = 0;
+    static SynchronizedLock lock = new SynchronizedLock();
     public static void main(String[] args){
-        SynchronizedLock lock = new SynchronizedLock();
 
-        for (int i=0;i<100;i++){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        lock.lock();
-                        String name = Thread.currentThread().getName();
-                        sum += Integer.valueOf(name.replace("thread-",""));
-                        System.out.println(name+" sum = "+sum);
-                        lock.unlock();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, "thread-"+i).start();
+        for (int i=0;i<1;i++){
+            Thread thread =  new Thread(runnable , "thread-1");
+            Thread thread2 =  new Thread(runnable, "thread-2");
+            Thread thread3 =  new Thread(runnable , "thread-3");
+            thread.start();
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            thread2.start();
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            thread2.stop();
         }
-//        System.out.println("==================\n================\n===========");
     }
+
+    public static Runnable runnable = ()->{
+        try {
+            lock.lock();
+            String name = Thread.currentThread().getName();
+            sum += Integer.valueOf(name.replace("thread-",""));
+            System.out.println(name+" sum = "+sum);
+//            Thread.currentThread().interrupt();
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            lock.unlock();
+        }
+    };
 }
