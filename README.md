@@ -1,6 +1,6 @@
 # Core-Java
 
-## framework model
+## <Model> framework
 * Create a web service container like tomcat 
 * Create a web framework like spring
 
@@ -16,7 +16,7 @@ Web Framework Already Exist Events
 >   - Service
 >   - RequestMapping
 
-## jdklib
+## <Model> jdklib
 ### Realize JDK API function
 * Lock
 * ThreadLocal
