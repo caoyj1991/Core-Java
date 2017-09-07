@@ -25,3 +25,5 @@ Web Framework Already Exist Events
 Already Exist API
 > - Realize Lock action by using <i><b>synchronized</b></i> keyword
 >   - <b>com.current.lock.v1.SynchronizedLock</b> unfair lock can block thread
+>   - <b>com.current.lock.v2.SynchronizedFairLock</b> fair lock can block thread
+>       - when block thread has been interrupted or destroy, lock can notify that thread.
