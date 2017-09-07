@@ -9,10 +9,8 @@ package com.exception;
 public class ServerException extends Exception {
 
     private String message;
-    private Exception exception;
 
-    public ServerException(String message, Exception e){
-        this.message = message;
-        this.exception = e;
+    public ServerException(String message){
+        super(message);
     }
 }

@@ -42,7 +42,7 @@ public class SocketThreadExecutor {
         try {
             executor.execute(runnable);
         }catch (Exception e){
-            throw new ServerException(e.getMessage(), e);
+            throw new ServerException(e.getMessage());
         }
     }
 }

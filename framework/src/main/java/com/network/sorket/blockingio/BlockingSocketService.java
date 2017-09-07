@@ -32,7 +32,7 @@ public class BlockingSocketService {
             socketConnectionService = new SocketConnectionService();
         } catch (IOException e) {
             e.printStackTrace();
-            throw new ServerException(e.getMessage(), e);
+            throw new ServerException(e.getMessage());
         }
     }
 
@@ -44,7 +44,7 @@ public class BlockingSocketService {
                 System.out.println("new request=======");
                 socketConnectionService.resolve(socketConnection);
             }catch (Exception e){
-                throw new ServerException(e.getMessage(), e);
+                throw new ServerException(e.getMessage());
             }
         }
 
