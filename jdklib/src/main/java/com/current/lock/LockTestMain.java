@@ -9,9 +9,30 @@ import com.current.lock.v2.SynchronizedFairLock;
  */
 public class LockTestMain {
     static int sum = 0;
-    static Lock lock = new SynchronizedFairLock();
+    static Lock lock = new SynchronizedLock();
     public static void main(String[] args){
+        runningTest();
+        exceptionTest();
+    }
 
+    public static void runningTest(){
+        for (int i=0;i<1000;i++){
+            new Thread(()->{
+                try {
+                    lock.lock();
+                    String name = Thread.currentThread().getName();
+                    sum += Integer.valueOf(name.replace("thread-",""));
+                    System.out.println(name+" sum = "+sum);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }finally {
+                    lock.unlock();
+                }
+            }, "thread-"+i).start();
+        }
+    }
+
+    public static void exceptionTest(){
         for (int i=0;i<1;i++){
             Thread thread =  new Thread(runnable , "thread-1");
             Thread thread2 =  new Thread(runnable, "thread-2");
