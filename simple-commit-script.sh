@@ -6,7 +6,7 @@ message=$1
 fi
 echo $message
 git add *
-git commit -m "not need comment"
+git commit -m "$message"
 git push
 
 
