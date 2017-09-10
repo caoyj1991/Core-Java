@@ -29,4 +29,4 @@ Already Exist API
 >       - when block thread has been interrupted or destroy, lock can notify that thread.
 > - Realize BlockingQueue
 >   - <b>com.current.queue.jdkAPI.ArraysSynchronizedQueue</b> use synchronized and array
->   - <b>com.current.queue.projectAPI.ArraysSynchronizedLockQueue</b> use <b><i>SynchronizedLock</i><b> and array
+>   - <b>com.current.queue.projectAPI.ArraysSynchronizedLockQueue</b> use <b><i>SynchronizedLock</i></b> and array
