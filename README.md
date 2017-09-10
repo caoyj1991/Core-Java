@@ -27,3 +27,5 @@ Already Exist API
 >   - <b>com.current.lock.v1.SynchronizedLock</b> unfair lock can block thread
 >   - <b>com.current.lock.v2.SynchronizedFairLock</b> fair lock can block thread
 >       - when block thread has been interrupted or destroy, lock can notify that thread.
+> - Realize BlockingQueue
+>   - <b>com.current.queue.jdkAPI.ArraysSynchronizedQueue</b> use synchronized and array
