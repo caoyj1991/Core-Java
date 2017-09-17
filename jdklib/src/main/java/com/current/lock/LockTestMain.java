@@ -1,7 +1,8 @@
 package com.current.lock;
 
-import com.current.lock.v1.SynchronizedLock;
-import com.current.lock.v2.SynchronizedFairLock;
+import com.current.lock.v3.SynchronizedShareLock;
+
+import java.util.Random;
 
 /**
  * Author Mr.Pro
@@ -9,63 +10,44 @@ import com.current.lock.v2.SynchronizedFairLock;
  */
 public class LockTestMain {
     static int sum = 0;
-    static Lock lock = new SynchronizedLock();
+    static SynchronizedShareLock lock = new SynchronizedShareLock();
     public static void main(String[] args){
-        runningTest();
-        exceptionTest();
-    }
 
-    public static void runningTest(){
-        for (int i=0;i<1000;i++){
-            new Thread(()->{
+        for (int i=0;i<15;i++){
+            final int finalI = i;
+            new Thread(() -> {
                 try {
-                    lock.lock();
-                    String name = Thread.currentThread().getName();
-                    sum += Integer.valueOf(name.replace("thread-",""));
-                    System.out.println(name+" sum = "+sum);
+                    if (new Random().nextBoolean()){
+                        lock.writeLock();
+                        Thread.currentThread().setName("WRITE=>thread-"+ finalI);
+                    }else {
+                        lock.readLock();
+                        Thread.currentThread().setName("READ=>thread-"+ finalI);
+                    }
+                    System.out.println(Thread.currentThread().getName()+" running");
+                    Thread.sleep(100);
+                    System.out.println(Thread.currentThread().getName()+" finish");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }finally {
                     lock.unlock();
                 }
-            }, "thread-"+i).start();
+            }).start();
         }
-    }
 
-    public static void exceptionTest(){
-        for (int i=0;i<1;i++){
-            Thread thread =  new Thread(runnable , "thread-1");
-            Thread thread2 =  new Thread(runnable, "thread-2");
-            Thread thread3 =  new Thread(runnable , "thread-3");
-            thread.start();
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            thread2.start();
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            thread2.interrupt();
-            thread3.start();
-        }
+//        for (int i=0;i<10;i++){
+//            new Thread(() -> {
+//                try {
+//                    lock.readLock();
+//                    System.out.println(Thread.currentThread().getName()+" running");
+//                    Thread.sleep(100);
+//                    System.out.println(Thread.currentThread().getName()+" finish");
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }finally {
+//                    lock.unlock();
+//                }
+//            }, "READ=>thread-"+i).start();
+//        }
     }
-
-    public static Runnable runnable = ()->{
-        try {
-            lock.lock();
-            String name = Thread.currentThread().getName();
-            sum += Integer.valueOf(name.replace("thread-",""));
-            System.out.println(name+" sum = "+sum);
-//            Thread.currentThread().interrupt();
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }finally {
-            lock.unlock();
-        }
-    };
 }

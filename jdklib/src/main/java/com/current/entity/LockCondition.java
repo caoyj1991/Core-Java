@@ -7,23 +7,27 @@ package com.current.entity;
  */
 public class LockCondition implements Condition {
 
+    public static LockCondition newInstance() {
+        return new LockCondition();
+    }
+
     @Override
-    public void await() {
+    public void await() throws InterruptedException {
 
     }
 
     @Override
-    public void await(long time) {
+    public void await(long time) throws InterruptedException {
 
     }
 
     @Override
-    public void signal() {
+    public void signal() throws InterruptedException {
 
     }
 
     @Override
-    public void signalAll() {
+    public void signalAll() throws InterruptedException {
 
     }
 }

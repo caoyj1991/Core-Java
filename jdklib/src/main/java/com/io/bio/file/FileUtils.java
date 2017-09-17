@@ -23,4 +23,12 @@ public class FileUtils {
         }
         return text.toString();
     }
+
+    public static void main(String[] arg) throws IOException {
+        String temp = readFile("test.txt");
+        String[] t = temp.split("\n");
+        for (String line : t){
+            System.out.println(line.split(" ")[2].split(";")[0].trim()+",");
+        }
+    }
 }

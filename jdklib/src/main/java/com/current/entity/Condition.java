@@ -6,11 +6,11 @@ package com.current.entity;
  */
 public interface Condition {
 
-    void await();
+    void await() throws InterruptedException;
 
-    void await(long time);
+    void await(long time) throws InterruptedException;
 
-    void signal();
+    void signal() throws InterruptedException;
 
-    void signalAll();
+    void signalAll() throws InterruptedException;
 }

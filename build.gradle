@@ -4,12 +4,13 @@ sourceCompatibility = 1.8
 
 
 repositories {
-    mavenCentral()
+    maven{
+        url "https://repo1.maven.org/maven2"
+    }
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile group: 'com.jcraft', name: 'jsch', version: '0.1.54'
     compileOnly 'org.projectlombok:lombok:1.16.18'
     compile fileTree(dir: 'vendor-lib', include: '*.jar')
 }
