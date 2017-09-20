@@ -1,17 +1,8 @@
-private boolean atfFavorite;
-private boolean pickerThumbnailClickable;
-private OptionPickerStyle optionPickerStyle;
-private boolean preloadOption;
-private boolean facebookEvent;
-private boolean hideAddCart;
-private boolean hideDirectPurchase;
-private boolean hideOptionCount;
-private boolean applySwiftForSCP; // this one can be delete after AB close
-private boolean hideHandlerBarFavorite;
-private List<Expression> invalidMessage;
-private boolean isUnknownProduct;
-private boolean aosAlsoViewedSwipe;
-private EngineeringFlagsFVO engineeringFlags;
-private String addToCartLabel;		// for app display handlebar button label
-private String directPurchaseLabel;	// for app display handlebar button label
-private String phoneRegularExpression;
+private Integer taskId;
+private String type;
+private String description;
+private Integer status;
+private String path;
+private String startDate;
+private String endDate;
+private Integer missionId;
