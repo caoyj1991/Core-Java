@@ -2,6 +2,7 @@ package com.current.lock.v3;
 
 import com.current.lock.Lock;
 import com.current.lock.Node;
+import com.current.lock.Node.Type;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
@@ -14,7 +15,7 @@ public class SynchronizedShareLock implements Lock {
 
     private Logger logger = Logger.getLogger(SynchronizedShareLock.class.getName());
 
-    private volatile Node.Type nodeType = null;
+    private volatile Type nodeType = null;
     private AtomicInteger count;
     private Node headNode, tailNode;
     private Byte[] obj;
@@ -45,25 +46,33 @@ public class SynchronizedShareLock implements Lock {
 
     @Override
     public void lock() throws InterruptedException {
-        while (true){
-            if(count.get() != 0 && !isShare()){
+        for (;;){
+            try {
+                Node node = getFirstNode();
+                if(!node.getThread().isAlive()){
+                    logger.warning(node.getThread().getName()+" dead");
+                    moveToNextNode(node);
+                    continue;
+                }
+                if(Thread.currentThread().equals(node.getThread())){
+                    if(nodeType == null) {
+                        nodeType = node.getType();
+                        moveToNextNode(node);
+                        acquire(1);
+                        break;
+                    }else if(isShare()
+                            && Node.Type.SHARE.equals(node.getType())){
+                        moveToNextNode(node);
+                        acquire(1);
+                        break;
+                    }
+                }
                 obj.wait();
+            }catch (InterruptedException exception){
+                logger.warning(Thread.currentThread().getName()+" has been interrupted");
+                acquire(1);
+                throw new InterruptedException(Thread.currentThread().getName()+" has been interrupted");
             }
-            Node node = getFirstNode();
-            if(!Thread.currentThread().equals(node.getCurrentThread())){
-                obj.wait();
-                continue;
-            }
-            if(nodeType == null) {
-                nodeType = node.getType();
-            }
-            if(isShare() && !node.getType().equals(Node.Type.SHARE)){
-                obj.wait();
-                continue;
-            }
-            acquire(1);
-            headNode.setNextNode(node.getNextNode());
-            break;
         }
     }
 
@@ -79,11 +88,15 @@ public class SynchronizedShareLock implements Lock {
     }
 
     private void addWaiter(Node.Type type){
-        tailNode.setCurrentThread(Thread.currentThread());
+        tailNode.setThread(Thread.currentThread());
         tailNode.setType(type);
         Node newTailNode = new Node();
         tailNode.setNextNode(newTailNode);
         tailNode = newTailNode;
+    }
+
+    private void moveToNextNode(Node node){
+        headNode.setNextNode(node.getNextNode());
     }
 
     private Node getFirstNode(){

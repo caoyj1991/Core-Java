@@ -2,6 +2,8 @@ package com.current.lock;
 
 import com.current.lock.v3.SynchronizedShareLock;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -11,18 +13,21 @@ import java.util.Random;
 public class LockTestMain {
     static int sum = 0;
     static SynchronizedShareLock lock = new SynchronizedShareLock();
-    public static void main(String[] args){
-
-        for (int i=0;i<15;i++){
-            final int finalI = i;
-            new Thread(() -> {
+    public static void main(String[] args) throws InterruptedException {
+        List<Thread> threads = new ArrayList<>();
+        for (int i=0;i<100;i++){
+            String threadName ="";
+            if (new Random().nextBoolean()&&i<50){
+                threadName =  "WRITE=>thread-"+ i;
+            }else {
+                threadName =  "READ**>thread-"+ i;
+            }
+            Thread thread = new Thread(() -> {
                 try {
-                    if (new Random().nextBoolean()){
-                        lock.writeLock();
-                        Thread.currentThread().setName("WRITE=>thread-"+ finalI);
-                    }else {
+                    if(Thread.currentThread().getName().startsWith("READ")){
                         lock.readLock();
-                        Thread.currentThread().setName("READ=>thread-"+ finalI);
+                    }else {
+                        lock.writeLock();
                     }
                     System.out.println(Thread.currentThread().getName()+" running");
                     Thread.sleep(100);
@@ -32,9 +37,14 @@ public class LockTestMain {
                 }finally {
                     lock.unlock();
                 }
-            }).start();
+            }, threadName);
+            threads.add(thread);
         }
-
+        for (Thread t : threads){
+            t.start();
+        }
+        Thread.sleep(100);
+        threads.get(new Random().nextInt(100)).interrupt();
 //        for (int i=0;i<10;i++){
 //            new Thread(() -> {
 //                try {

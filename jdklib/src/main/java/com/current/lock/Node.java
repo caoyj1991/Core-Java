@@ -17,6 +17,6 @@ public class Node {
     }
 
    private Type type;
-   private Thread currentThread;
+   private Thread thread;
    private Node nextNode;
 }
