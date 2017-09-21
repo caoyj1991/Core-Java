@@ -28,24 +28,38 @@ public class SynchronizedShareLock implements Lock {
         count = new AtomicInteger(0);
     }
 
+    @Override
+    public void lock() throws InterruptedException {
+        writeLock();
+    }
+
+    @Override
+    public void unlock() {
+        synchronized (obj){
+            acquire(-1);
+            if(count.get() == 0){
+                nodeType = null;
+            }
+            obj.notifyAll();
+        }
+    }
+
     public void readLock() throws InterruptedException {
         Node.Type type = Node.Type.SHARE;
         synchronized (obj){
-            addWaiter(type);
-            lock();
+            tryLock(type);
         }
     }
 
     public void writeLock() throws InterruptedException{
         Node.Type type = Node.Type.SINGLE;
         synchronized (obj){
-            addWaiter(type);
-            lock();
+            tryLock(type);
         }
     }
 
-    @Override
-    public void lock() throws InterruptedException {
+    public void tryLock(Type type) throws InterruptedException{
+        addWaiter(type);
         for (;;){
             try {
                 Node node = getFirstNode();
@@ -73,17 +87,6 @@ public class SynchronizedShareLock implements Lock {
                 acquire(1);
                 throw new InterruptedException(Thread.currentThread().getName()+" has been interrupted");
             }
-        }
-    }
-
-    @Override
-    public void unlock() {
-        synchronized (obj){
-            acquire(-1);
-            if(count.get() == 0){
-                nodeType = null;
-            }
-            obj.notifyAll();
         }
     }
 

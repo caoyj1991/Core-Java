@@ -26,7 +26,9 @@ Already Exist API
 > - Realize Lock action by using <i><b>synchronized</b></i> keyword
 >   - <b>com.current.lock.v1.SynchronizedLock</b> unfair lock can block thread
 >   - <b>com.current.lock.v2.SynchronizedFairLock</b> fair lock can block thread
->       - when block thread has been interrupted or destroy, lock can notify that thread.
+>       - when the first thread is not alive, will be removed from the chain.
+>   - <b>com.current.lock.v3.SynchronizedShareLock</b> fair lock & and add readLock & writeLock can block thread. <b>readLock()</b>,<b>writeLock()</b>,<b>lock()</b>
+>       - when the first thread is not alive, will be removed from the chain.
 > - Realize BlockingQueue
 >   - <b>com.current.queue.jdkAPI.ArraysSynchronizedQueue</b> use synchronized and array
 >   - <b>com.current.queue.projectAPI.ArraysSynchronizedLockQueue</b> use <b><i>SynchronizedLock</i></b> and array
