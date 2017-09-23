@@ -28,5 +28,23 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: rxjava-2.1.4">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/vendor-lib/rxjava-2.1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: reactive-streams-1.0.1">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/vendor-lib/reactive-streams-1.0.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
