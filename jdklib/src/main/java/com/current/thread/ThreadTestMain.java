@@ -9,15 +9,52 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class ThreadTestMain {
 
-    public static void main(String[] args) throws InterruptedException {
-        Flowable.fromCallable(() -> {
-            Thread.sleep(1000);
-            return "Done";
-        })
-        .subscribeOn(Schedulers.io())
-        .observeOn(Schedulers.single())
-        .subscribe(System.out::println, Throwable::printStackTrace);
+    public static int i = 0;
 
-        Thread.sleep(2000);
+    public static void main(String[] args) throws InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    try {
+
+                        System.out.println("run");
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Thread.currentThread().yield();
+                    if(i++ == 5){
+                        break;
+                    }
+                }
+            }
+        });
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                while (true){
+                    try {
+
+                        System.out.println("run2");
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if(i++ == 10){
+                        break;
+                    }
+                }
+            }
+        });
+        thread2.start();
+//        Thread.sleep(1000);
+        thread.start();
+
     }
 }
