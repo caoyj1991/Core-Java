@@ -1,3 +1,9 @@
+# Java VM
+java version "1.8.0_102"<br>
+Java(TM) SE Runtime Environment (build 1.8.0_102-b14)<br>
+Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)<br>
+
+
 ### Deprecated 
 countStackFrames ()<br>
 destroy ()<br>
@@ -8,7 +14,8 @@ suspend ()<br>
 
 ### LifeCycle
 
-### Thread Status
+#### Thread Status
+
 1. <b>NEW</b> : Thread state for a thread which has <b>not yet started.</b>
 2. <b>RUNNABLE</b> : Thread state for a runnable thread.  A thread in the runnable state is <b>executing</b> in the Java virtual machine but it maybe waiting for other resources from the operating system such as processor.
 3. <b>BLOCKED</b> : Thread state for a thread blocked waiting for <b>monitor lock</b>. to enter a <b>synchronized</b> block/method or reenter a <b>synchronized</b> block/method after calling <b><u>Object.waiting()</u></b>
