@@ -9,16 +9,16 @@ suspend ()<br>
 ### LifeCycle
 
 ### Thread Status
-1. NEW : Thread state for a thread which has <b>not yet started.</b>
-2. RUNNABLE : Thread state for a runnable thread.  A thread in the runnable state is <b>executing</b> in the Java virtual machine but it maybe waiting for other resources from the operating system such as processor.
-3. BLOCKED : Thread state for a thread blocked waiting for <b>monitor lock</b>. to enter a <b>synchronized</b> block/method or reenter a <b>synchronized</b> block/method after calling <b><u>Object.waiting()</u></b>
-4. WAITING : Thread state for a waiting thread. one thread due to call following method.
+1. <b>NEW</b> : Thread state for a thread which has <b>not yet started.</b>
+2. <b>RUNNABLE</b> : Thread state for a runnable thread.  A thread in the runnable state is <b>executing</b> in the Java virtual machine but it maybe waiting for other resources from the operating system such as processor.
+3. <b>BLOCKED</b> : Thread state for a thread blocked waiting for <b>monitor lock</b>. to enter a <b>synchronized</b> block/method or reenter a <b>synchronized</b> block/method after calling <b><u>Object.waiting()</u></b>
+4. <b>WAITING</b> : Thread state for a waiting thread. one thread due to call following method.
     <ul>
         <li> Object.waiting() {with no timeout}
         <li> Thread object -> thread.join() {with no timeout}
         <li> LockSupport.park()
     </ul>
-5. TIMED_WAITING : Thread state for a waiting thread with a specified waiting time.A thread is in the timed waiting state due to calling one of the following methods with a specified positive waiting time
+5. <b>TIMED_WAITING</b> : Thread state for a waiting thread with a specified waiting time.A thread is in the timed waiting state due to calling one of the following methods with a specified positive waiting time
     <ul>
         <li> Thread.sleep()
         <li> Object.waiting(xxx) {with timeout}
@@ -26,7 +26,7 @@ suspend ()<br>
         <li> LockSupport.parkNanos()
         <li> LockSupport.parkUntil()
     </ul>
-6. TERMINATED : Thread state for a terminated thread. The thread has been completed execution.
+6. <b>TERMINATED</b> : Thread state for a terminated thread. The thread has been completed execution.
 
 activeCount ()<br>
 auditSubclass (java.lang.Class)<br>
