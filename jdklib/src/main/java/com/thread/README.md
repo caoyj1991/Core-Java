@@ -12,7 +12,19 @@ stop ()<br>
 stop (java.lang.Throwable)<br>
 suspend ()<br>
 
+### Architecture
+*  ThreadGroup
+    * <b>ThreadGroup</b>(Manage) & <b>ThreadPool</b>(save resource, avoid the time of create an new thread from system.)
+        * ThreadPool like a collection to collect all thread object into an queue, and when the consumer THREAD is free, then <b>take</b> one of the collection to run.
+        * ThreadGroup is the controller to manager the any of the thread object, and with the threads waiting count & and the sub class, sub class loader.
+          Provide difference functions for thread.
+*  Thread
+
 ### LifeCycle
+
+##### For VM
+
+##### For JAVA
 
 #### Thread Status
 
