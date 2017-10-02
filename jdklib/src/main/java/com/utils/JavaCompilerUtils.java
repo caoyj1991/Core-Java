@@ -24,9 +24,9 @@ public class JavaCompilerUtils {
             }
             String temp = "";
             if(param.length()>0){
-                temp = method.getName()+" ("+param.substring(0, param.length()-2)+");";
+                temp = method.getName()+" ("+param.substring(0, param.length()-2)+")<br>";
             }else{
-                temp = method.getName()+" ();";
+                temp = method.getName()+" ()<br>";
             }
             if(method.getDeclaredAnnotations().length>0){
                 Annotation[] t = method.getDeclaredAnnotations();
