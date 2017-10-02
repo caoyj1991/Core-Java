@@ -1,4 +1,6 @@
-package com.io.bio.file;
+package com.io.bio.file.coupang;
+
+import com.io.bio.file.FileUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;

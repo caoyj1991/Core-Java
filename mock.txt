@@ -1,0 +1,6 @@
+VENDOR_DIRECT ("2_COMP_DLV", "업체직송"),
+MAKE_ORDER ("3_MAKE_ORD", "주문제작"),
+INSTRUCTURE ("4_INST_DLV", "설치배송"),
+AGENT_BUY ("5_BUY_DLV", "구매대행"),
+COLD_FRESH ("6_COLD_DLV", "신선냉동"),
+MAKE_ORDER_DIRECT ("7_MAKE_DLV", "주문제작(업체직송)");
