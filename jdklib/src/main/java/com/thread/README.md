@@ -2,7 +2,7 @@
 java version "1.8.0_102"<br>
 Java(TM) SE Runtime Environment (build 1.8.0_102-b14)<br>
 Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)<br>
-
+<hr>
 
 ### Deprecated 
 countStackFrames ()<br>
@@ -11,22 +11,30 @@ resume ()<br>
 stop ()<br>
 stop (java.lang.Throwable)<br>
 suspend ()<br>
+<hr>
 
 ### Note
 *  ThreadGroup : <b>ThreadGroup</b>(Manage) & <b>ThreadPool</b>(save resource, avoid the time of create an new thread from system.)
     * ThreadPool like a collection to collect all thread object into an queue, and when the consumer THREAD is free, then <b>take</b> one of the collection to run.
     * ThreadGroup is the controller to manager the any of the thread object, and with the threads waiting count & and the sub class, sub class loader.
           Provide difference functions for thread.
+<hr>
 
 ### LifeCycle
-<a href="ThreadLifeCycle.md">go</a>
+##### <a href="ThreadLifeCycle.md">see more</a>
+<hr>
 
+### Exception
+* UncaughtExceptionHandler 
+    * java.lang.Thread.UncaughtExceptionHandler
+* Thread method - <b>dispatchUncaughtException()</b> is only called by JVM
+<hr>
 
 ##### For VM
 
 ##### For JAVA
 
-#### Thread Status
+#### Thread Status 6
 
 1. <b>NEW</b> : Thread state for a thread which has <b>not yet started.</b>
 2. <b>RUNNABLE</b> : Thread state for a runnable thread.  A thread in the runnable state is <b>executing</b> in the Java virtual machine but it maybe waiting for other resources from the operating system such as processor.
@@ -46,6 +54,8 @@ suspend ()<br>
         <li> LockSupport.parkUntil()
     </ul>
 6. <b>TERMINATED</b> : Thread state for a terminated thread. The thread has been completed execution.
+<hr>
+
 
 activeCount ()<br>
 auditSubclass (java.lang.Class)<br>

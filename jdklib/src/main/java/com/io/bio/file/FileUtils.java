@@ -24,6 +24,19 @@ public class FileUtils {
         return text.toString();
     }
 
+    public static void write(String path, String fileName, String data) throws IOException {
+        File dir = new File(path);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        File writeFile = new File(path+"/"+fileName);
+        writeFile.createNewFile();
+        OutputStream outputStream = new FileOutputStream(writeFile);
+        outputStream.write(data.getBytes());
+        outputStream.flush();
+        outputStream.close();
+    }
+
     public static void main(String[] arg) throws IOException {
         String temp = readFile("test.txt");
         String[] t = temp.split("\n");
